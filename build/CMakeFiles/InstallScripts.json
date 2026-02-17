@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/MyRepos/MagPulse/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/MyRepos/MagPulse/build",
-  "command": "C:\\PROGRA~1\\MICROS~2\\18\\PROFES~1\\VC\\Tools\\MSVC\\1450~1.357\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP -external:IC:\\MyRepos\\MagPulse\\SFML-3.0.2\\include -external:W0 /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17 /FoCMakeFiles\\MagPulse.dir\\src\\main.cpp.obj /FdCMakeFiles\\MagPulse.dir\\ /FS -c C:\\MyRepos\\MagPulse\\src\\main.cpp",
-  "file": "C:/MyRepos/MagPulse/src/main.cpp",
-  "output": "C:/MyRepos/MagPulse/build/CMakeFiles/MagPulse.dir/src/main.cpp.obj"
-}
-]

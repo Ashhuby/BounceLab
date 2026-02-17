@@ -1,3 +1,3 @@
-C:/MyRepos/MagPulse/build/CMakeFiles/MagPulse.dir
-C:/MyRepos/MagPulse/build/CMakeFiles/edit_cache.dir
-C:/MyRepos/MagPulse/build/CMakeFiles/rebuild_cache.dir
+C:/MyRepos/BounceLab/build/CMakeFiles/BounceLab.dir
+C:/MyRepos/BounceLab/build/CMakeFiles/ALL_BUILD.dir
+C:/MyRepos/BounceLab/build/CMakeFiles/ZERO_CHECK.dir

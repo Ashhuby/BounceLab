@@ -1,28 +1,25 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>  
+#include <iostream>
 #include <vector>
 #include <cmath>
-#include <optional>
 
 int main() {
-    std::cout << "Circle drawn.";
+    std::cout << "Starting Bouncing Balls Simulation" << std::endl;
 
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "MagPulse SFML 3.0 Test");
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "Bouncing Balls");
     
-    sf::CircleShape shape(50.f);
-    shape.setFillColor(sf::Color::Red);
-    shape.setPosition({375.f, 275.f});
-
+    // We'll add our ball struct here
+    
     while (window.isOpen()) {
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
-
+        
         window.clear();
-        window.draw(shape);
+        // We'll draw here
         window.display();
     }
+    
     return 0;
 }

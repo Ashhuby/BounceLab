@@ -3,8 +3,9 @@
 #include <vector>
 
 // Global variables
-const float Gravity = 980.0f;
+const float GravityMultiplier = 20.0;
 const float Restitution = 0.8f; // 1 = perfectly elastic 0 = perfectly ineleastic
+const float Gravity = 9.80f * GravityMultiplier;
 
 struct Ball{
     sf::Vector2f position;
@@ -30,9 +31,9 @@ void DrawBall(Ball b, sf::RenderWindow& window) {
     window.draw(circle); 
 }
 
-void UpdateBall(Ball& b) {
-    b.velocity.y += Gravity;
-    b.position += b.velocity;
+void UpdateBall(Ball& b, float delta) {
+    b.velocity.y += Gravity * delta;
+    b.position += b.velocity * delta;
 }
 
 int main()
@@ -40,9 +41,10 @@ int main()
     std::cout << "=== BounceLab Starting ===" << std::endl;
 
     sf::RenderWindow window(sf::VideoMode({ 800, 600 }), "BounceLab");
-    window.setFramerateLimit(60);
-    std::cout << "FPS";
-
+    //window.setFramerateLimit(60);
+    //std::cout << "FPS";
+             
+    // Set up balls
     std::vector<Ball> balls;
 
     Ball ball1 = Ball({ 400.0f,300.0f }, 25.0f, sf::Color::Red);
@@ -50,18 +52,23 @@ int main()
     balls.push_back(ball1);
     balls.push_back(ball2);
 
+    // Set up dt
+    sf::Clock dtClock;
+    float dt; // 1/60 0.16ms
+
     // Loop
     while (window.isOpen())
     {
         // Events here
+        dt = (float)dtClock.getElapsedTime().asSeconds();
+        std::cout << "DT: " << dt << std::endl;
+        dtClock.restart();
 
         window.clear(sf::Color::Black);
 
-        // Draw balls
-        for (int i = 0; i < balls.size(); i++) {}
-
-        for (Ball b : balls) {           
-            UpdateBall(b);
+        // Draw and update balls
+        for (Ball& b : balls) {           
+            UpdateBall(b,dt);
             DrawBall(b, window);
         }
 

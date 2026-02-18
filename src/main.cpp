@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 // Global variables
 const float GravityMultiplier = 100.0;
@@ -14,7 +15,6 @@ const float FloorPosition = 600.0;
 const float RightWallPosition = 800.0;
 const float CeilingPosition = 0.0;
 const float LeftWallPosition = 0.0;
-
 
 struct Ball{
     sf::Vector2f position;
@@ -30,7 +30,6 @@ public:
         velocity = { 0.0f,0.0f };
     }
 };
-
 
 void DrawBall(Ball b, sf::RenderWindow& window) {
     sf::CircleShape circle;
@@ -71,6 +70,23 @@ void UpdateBall(Ball& b, float delta) {
     if (b.velocity.x >= MaxSpeed) b.velocity.x = MaxSpeed;
 }
 
+void DetectBallCollisions(std::vector<Ball>& b) {
+    for (int i = 0; i < b.size(); i++) {
+        Ball& currentBall = b[i];
+        for (int j = i + 1; j < b.size(); j++) {            
+            float distanceX = currentBall.position.x - b[j].position.x;
+            float distanceY = currentBall.position.y - b[j].position.y;
+            float distance = std::sqrt(distanceX * distanceX + distanceY * distanceY); //dot product between x and y then abs value
+            if (std::abs(distance) <= (currentBall.radius + b[j].radius)) {
+            std::cout << "Collision Detected" << std::endl;
+
+
+
+            }
+        }
+    }
+}
+
 int main()
 {
     std::cout << "=== BounceLab Starting ===" << std::endl;
@@ -104,7 +120,7 @@ int main()
                 float x = mousePressed->position.x;
                 float y = mousePressed->position.y;
                 sf::Color randomColour(rand() % 256, rand() % 256, rand() % 256);
-                float randomRadius = 10 + (rand() % 30);
+                float randomRadius = 25 + (rand() % 5);
                 
                 std::cout << x << ", " << y << std::endl;
 
@@ -120,6 +136,8 @@ int main()
             UpdateBall(b,dt);
             DrawBall(b, window);
         }
+        // Detect ball collisions
+        DetectBallCollisions(balls);
 
         window.display();
     }

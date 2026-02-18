@@ -3,9 +3,13 @@
 #include <vector>
 
 // Global variables
-const float GravityMultiplier = 20.0;
+const float GravityMultiplier = 100.0;
 const float Restitution = 0.8f; // 1 = perfectly elastic 0 = perfectly ineleastic
 const float Gravity = 9.80f * GravityMultiplier;
+
+// Walls
+std::vector<float> Walls = {};
+const float FloorPosition = 600.0;
 
 struct Ball{
     sf::Vector2f position;
@@ -32,8 +36,16 @@ void DrawBall(Ball b, sf::RenderWindow& window) {
 }
 
 void UpdateBall(Ball& b, float delta) {
+    // Gravity is a thing?
     b.velocity.y += Gravity * delta;
+
     b.position += b.velocity * delta;
+
+    // Floor detection
+    if (b.position.y >= (FloorPosition - b.radius)) {
+        b.position.y = FloorPosition - b.radius;   // Move back 
+        b.velocity.y *= -1 * Restitution;
+    }     
 }
 
 int main()

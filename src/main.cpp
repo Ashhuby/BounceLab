@@ -9,7 +9,7 @@ const float WindowHeight = 600;
 
 // Global variables
 const float GravityMultiplier = 100.0;
-const float Restitution = 1.0f; // 1 = perfectly elastic 0 = perfectly ineleastic
+const float Restitution = 0.8f; // 1 = perfectly elastic 0 = perfectly ineleastic
 const float Gravity = 9.80f * GravityMultiplier;
 const float MaxSpeed = 3000.0;
 
@@ -108,11 +108,15 @@ void DetectBallCollisions(std::vector<Ball>& b) {
 int main()
 {
     std::cout << "=== BounceLab Starting ===" << std::endl;
+    sf::Image icon; 
+    const std::string ICON_PATH = "C:/MyRepos/BounceLab/Icon/BounceLabIcon.png";
+    if (!icon.loadFromFile(ICON_PATH)) {
+        std::cout << "ERROR: Could not load icon!" << std::endl;
+    }
 
     sf::RenderWindow window(sf::VideoMode({ (int)WindowWidth, (int)WindowHeight}), "BounceLab");
-    //window.setFramerateLimit(60);
-    //std::cout << "FPS";
-             
+    window.setIcon(icon.getSize(), icon.getPixelsPtr());
+                          
     // Set up balls
     std::vector<Ball> balls;
 

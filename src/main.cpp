@@ -9,7 +9,7 @@ const float WindowHeight = 600;
 
 // Global variables
 const float GravityMultiplier = 100.0;
-const float Restitution = 0.8f; // 1 = perfectly elastic 0 = perfectly ineleastic
+const float Restitution = 0.2f; // 1 = perfectly elastic 0 = perfectly ineleastic
 const float Gravity = 9.80f * GravityMultiplier;
 const float MaxSpeed = 3000.0;
 
@@ -108,10 +108,12 @@ void DetectBallCollisions(std::vector<Ball>& b) {
 int main()
 {
     std::cout << "=== BounceLab Starting ===" << std::endl;
-    sf::Image icon; 
-    const std::string ICON_PATH = "C:/MyRepos/BounceLab/Icon/BounceLabIcon.png";
-    if (!icon.loadFromFile(ICON_PATH)) {
+    sf::Image icon;
+    if (!icon.loadFromFile("Icon/BounceLabIcon.png")) {
         std::cout << "ERROR: Could not load icon!" << std::endl;
+    }
+    else {
+        std::cout << "Icon loaded successfully!" << std::endl;
     }
 
     sf::RenderWindow window(sf::VideoMode({ (int)WindowWidth, (int)WindowHeight}), "BounceLab");
@@ -144,7 +146,7 @@ int main()
 
         // Add balls with mouse
         while (const std::optional event = window.pollEvent()) {           
-            // TODO: drag state events
+            // Drag state events
             if (const auto* mousePressed = event->getIf<sf::Event::MouseButtonPressed>()) {
                 if (mousePressed->button == sf::Mouse::Button::Left) {
                     //Store inital mouse pos and show indicator 
@@ -158,7 +160,7 @@ int main()
                 }
              }
             if (const auto* mouseMoved = event->getIf<sf::Event::MouseMoved>()) {
-                // TODO: Update current mouse position during drag
+                // Update current mouse position during drag
                 if (isDragging) {
                 currentMouseX = mouseMoved->position.x;
                 currentMouseY = mouseMoved->position.y;
@@ -167,7 +169,7 @@ int main()
             // RELEASE MEEE
             if (const auto* mouseReleased = event->getIf<sf::Event::MouseButtonReleased>()) {
                 if (isDragging) {
-                    // TODO: Velocity Calculation
+                    // Velocity Calculation
                     float dragX = currentMouseX - initialMouseX;
                     float dragY = currentMouseY - initialMouseY;
 

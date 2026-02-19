@@ -31,4 +31,11 @@ if(WIN32)
         "${CMAKE_CURRENT_SOURCE_DIR}/SFML-3.0.2/bin/sfml-system-d-3.dll"
         $<TARGET_FILE_DIR:BounceLab>
     )
+
+    # Copy icon 
+    add_custom_command(TARGET BounceLab POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CMAKE_CURRENT_SOURCE_DIR}/Icon/BounceLabIcon.png"
+        "$<TARGET_FILE_DIR:BounceLab>/Icon/BounceLabIcon.png"
+    )
 endif()
